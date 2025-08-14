@@ -23,7 +23,7 @@ load_dotenv()
 app = FastAPI()
 #url = 'https://mdevelopeur.retailcrm.ru/api/v5/'
 url = os.getenv("URL")#'https://laminat77.retailcrm.ru'
-site = os.getenv('site')#= 'novers-spb'
+site = os.getenv('site')#= 'nn.novers'
 apikey = os.getenv('key') #'vikuHSdIKilFPMr0oyj5LpemwHvEPjVw'
 #apikey = 'nHY0H7zd7UWwcEiwN0EbwhXz2eGY9o9G'
 retail_client = retailcrm.v5(url, apikey)
@@ -92,14 +92,14 @@ async def post_order(client, first_name, last_name, email, subject, text, html, 
 async def get_mail(username, password, imap_server):
     array = []
     print('connecting to imap server...')
-    with MailBox(imap_server).login(username, password, initial_folder='Novers СПБ') as mailbox:
+    with MailBox(imap_server).login(username, password, initial_folder='Novers НН') as mailbox:
         print('fetching...')
-        exists = mailbox.folder.exists('Novers СПБ/INBOX|СПБ')
+        exists = mailbox.folder.exists('Novers НН/INBOX|НН')
         if not exists:
-            mailbox.folder.create('Novers СПБ/INBOX|СПБ')
+            mailbox.folder.create('Novers НН/INBOX|НН')
        
         for msg in mailbox.fetch(AND(seen=True)):
-            mailbox.move(msg.uid,'Novers СПБ/INBOX|СПБ') 
+            mailbox.move(msg.uid,'Novers НН/INBOX|НН') 
             attachments = []
             for a in msg.attachments:
                 print(a.filename)
